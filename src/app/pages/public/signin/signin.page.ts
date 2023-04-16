@@ -29,13 +29,13 @@ export class SigninPage implements OnInit {
 
     // Setup form
     this.signin_form = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.email, Validators.required])],
+      username: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
 
     // DEBUG: Prefill inputs
-    this.signin_form.get('email').setValue('john.doe@mail.com');
-    this.signin_form.get('password').setValue('123456');
+    this.signin_form.get('username').setValue('');
+    this.signin_form.get('password').setValue('');
   }
 
   // Sign in
@@ -44,30 +44,32 @@ export class SigninPage implements OnInit {
     this.submit_attempt = true;
 
     // If email or password empty
-    if (this.signin_form.value.email == '' || this.signin_form.value.password == '') {
+    if (this.signin_form.value.username == '' || this.signin_form.value.password == '') {
       this.toastService.presentToast('Error', 'Please input email and password', 'top', 'danger', 2000);
-
-    } else {
-
-      // Proceed with loading overlay
-      const loading = await this.loadingController.create({
-        cssClass: 'default-loading',
-        message: '<p>Signing in...</p><span>Please be patient.</span>',
-        spinner: 'crescent'
-      });
-      await loading.present();
-
-      // TODO: Add your sign in logic
-      // ...
-
-      // Fake timeout
-      setTimeout(async () => {
-        // Sign in success
-        await this.router.navigate(['/home']);
-        loading.dismiss();
-      }, 2000);
-
+      return;
     }
+
+    // Proceed with loading overlay
+    const loading = await this.loadingController.create({
+      cssClass: 'default-loading',
+      message: '<p>Signing in...</p><span>Please be patient.</span>',
+      spinner: 'crescent'
+    });
+    await loading.present();
+
+    // TODO: Add your sign in logic
+    // ...
+
+    this.authService.signIn(this.signin_form.value.username, this.signin_form.value.password)
+      .subscribe(res => {
+        console.log(res);
+      });
+    // Fake timeout
+    setTimeout(async () => {
+      // Sign in success
+      await this.router.navigate(['/home']);
+      loading.dismiss();
+    }, 2000);
   }
 
 }

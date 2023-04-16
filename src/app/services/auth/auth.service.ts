@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { urlJoin } from 'url-join-ts';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +12,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private httpClient: HttpClient,
   ) { }
 
   // Get user session
@@ -28,14 +33,21 @@ export class AuthService {
   }
 
   // Sign in
-  async signIn(email: string, password: string) {
+  signIn(username: string, password: string): Observable<any> {
     // Sample only - remove this after real authentication / session
-    let sample_user = {
-      email: email,
-      password: password
-    }
+    // let sample_user = {
+    //   username: username,
+    //   password: password
+    // }
 
-    return sample_user;
+    const url = urlJoin(environment.apiUrl, "v1/auth/login");
+    return this.httpClient.post(url, {
+      username: username,
+      password: password,
+      LoginType: 2,
+    });
+
+    // return sample_user;
   }
 
   // Sign up
