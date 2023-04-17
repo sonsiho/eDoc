@@ -23,12 +23,9 @@
 
     <!-- Login form -->
     <form class="form-default" [formGroup]="signin_form" (submit)="signIn()">
-      <ion-item color="dark" class="animate__animated animate__fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="person" item-start></ion-icon>
-          Tài khoản
-        </ion-label>
-        <ion-input color="secondary" type="text" formControlName="username"></ion-input>
+      <ion-item color="translucent" class="animate__animated animate__fadeInUp">
+        <ion-icon color="light" name="person" item-start></ion-icon>
+        <ion-input color="light" placeholder="Tài khoản" type="text" formControlName="username"></ion-input>
       </ion-item>
 
       <ion-item color="dark" class="animate__animated animate__fadeInUp">

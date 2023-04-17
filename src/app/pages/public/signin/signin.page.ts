@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastService } from 'src/app/services/toast/toast.service';
+import { ToastService } from 'src/app/core/services/toast/toast.service';
 import { Router } from '@angular/router';
+import { BaseReponseModel } from 'src/app/core/models/base-response.model';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-signin',
@@ -61,15 +63,21 @@ export class SigninPage implements OnInit {
     // ...
 
     this.authService.signIn(this.signin_form.value.username, this.signin_form.value.password)
-      .subscribe(res => {
-        console.log(res);
-      });
-    // Fake timeout
-    setTimeout(async () => {
-      // Sign in success
-      await this.router.navigate(['/home']);
-      loading.dismiss();
-    }, 2000);
+      .subscribe(
+        {
+          complete: () => {
+            loading.dismiss();
+          },
+          next: async (res: BaseReponseModel<any>) => {
+            if (res.success) {
+              this.authService.setSession(res.data.token);
+              await this.router.navigate(['/home']);
+            } else {
+              this.toastService.presentToast('Error', res.message, 'top', 'danger', 2000);
+              return;
+            }
+          },
+        });
   }
 
 }

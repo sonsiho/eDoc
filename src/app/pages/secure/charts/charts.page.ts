@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { HelperService } from 'src/app/services/helper/helper.service';
+import { HelperService } from 'src/app/core/services/helper/helper.service';
 
 @Component({
   selector: 'app-charts',
