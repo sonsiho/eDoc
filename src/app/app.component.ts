@@ -12,7 +12,7 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
 
   constructor(
-    private platform: Platform,
+    private platform: Platform
   ) {
     this.initializeApp();
   }
@@ -41,4 +41,6 @@ export class AppComponent {
       }, 2000);
     });
   }
+
+
 }

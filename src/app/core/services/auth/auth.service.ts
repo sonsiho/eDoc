@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
@@ -22,7 +22,9 @@ export class AuthService {
 
   // Get user session
   async getSession() {
-    return await this.dataService.get('access_token');
+    const accessToken = await this.dataService.get('access_token');
+    console.log(accessToken);
+    return accessToken;
   }
 
   async setSession(token) {
@@ -31,11 +33,10 @@ export class AuthService {
 
   // Sign in
   signIn(username: string, password: string): Observable<any> {
-    const url = urlJoin(environment.apiUrl, "v1/auth/login");
+    const url = urlJoin(environment.apiUrl, "v1/auth/token");
     return this.httpClient.post(url, {
-      username: username,
-      password: password,
-      LoginType: 2,
+      ClientId: 'smas3',
+      ClientSecret: '0aCpNK1F6Kssk4yhtJfbLA==',
     });
   }
 

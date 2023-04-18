@@ -10,46 +10,32 @@
 
 <ion-content>
 
-  <div class="ion-padding ion-full-height ion-flex ion-flex-center">
+  <div class="ion-padding h-100 ion-flex ion-flex-center" style="padding-top: 50px;">
 
     <div class="logo-container">
       <h1 class="animate__animated animate__fadeInUp">
-        <ion-text color="light">eDoc</ion-text>
+        <ion-text color="dark">eDoc</ion-text>
       </h1>
-      <!-- <p class="animate__animated animate__fadeInUp">
-        <ion-text color="secondary">Login to your account.</ion-text>
-      </p> -->
     </div>
 
     <!-- Login form -->
-    <form class="form-default" [formGroup]="signin_form" (submit)="signIn()">
-      <ion-item color="translucent" class="animate__animated animate__fadeInUp">
-        <ion-icon color="light" name="person" item-start></ion-icon>
-        <ion-input color="light" placeholder="Tài khoản" type="text" formControlName="username"></ion-input>
-      </ion-item>
+    <form [formGroup]="signin_form" (submit)="signIn()">
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <mat-label>Tài khoản</mat-label>
+        <input matInput placeholder="Tài khoản" formControlName="username">
+      </mat-form-field>
 
-      <ion-item color="dark" class="animate__animated animate__fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="lock-closed-outline"></ion-icon>
-          Mật khẩu
-        </ion-label>
-        <ion-input color="secondary" formControlName="password" type="password"></ion-input>
-      </ion-item>
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <mat-label>Mật khẩu</mat-label>
+        <input matInput placeholder="Mật khẩu" formControlName="password" type="password">
+      </mat-form-field>
 
-      <ion-button class="ion-margin-top" type="submit" expand="block" size="large" color="secondary">
-        Đăng nhập
-      </ion-button>
+      <button class="w-100" mat-raised-button color="primary" type="submit"> Đăng nhập</button>
 
       <!-- <ion-button color="light" fill="clear" expand="block" class="ion-button-small ion-margin-top-medium" routerLink="/password-reset">
         Forgot password?
       </ion-button> -->
     </form>
-
-    <!-- <div class="ion-text-center ion-margin-top">
-      <ion-text color="medium">
-        <small>&copy;{{current_year}} Firmino.dev</small>
-      </ion-text>
-    </div> -->
 
   </div>
 

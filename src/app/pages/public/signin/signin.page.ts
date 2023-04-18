@@ -54,7 +54,7 @@ export class SigninPage implements OnInit {
     // Proceed with loading overlay
     const loading = await this.loadingController.create({
       cssClass: 'default-loading',
-      message: '<p>Signing in...</p><span>Please be patient.</span>',
+      message: 'Đang xử lý...',
       spinner: 'crescent'
     });
     await loading.present();
@@ -68,9 +68,13 @@ export class SigninPage implements OnInit {
           complete: () => {
             loading.dismiss();
           },
+          error: (err) => {
+            this.toastService.presentToast('Error', JSON.stringify(err), 'top', 'danger', 2000);
+            loading.dismiss();
+          },
           next: async (res: BaseReponseModel<any>) => {
             if (res.success) {
-              this.authService.setSession(res.data.token);
+              await this.authService.setSession(res.data.token);
               await this.router.navigate(['/home']);
             } else {
               this.toastService.presentToast('Error', res.message, 'top', 'danger', 2000);
