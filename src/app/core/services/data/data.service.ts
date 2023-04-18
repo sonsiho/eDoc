@@ -24,11 +24,11 @@ export class DataService {
   }
 
   public async get(key: string) {
-    return await this._storage.get(key);
+    return await this._storage?.get(key);
   }
 
   public async clear() {
-    await this._storage.clear();
+    await this._storage?.clear();
   }
 
 }
