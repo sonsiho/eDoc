@@ -11,6 +11,10 @@ export class ToastService {
     public toastController: ToastController
   ) { }
 
+  async error(message) {
+    await this.presentToast('Error', message, 'top', 'danger', 2000);
+  }
+
   async presentToast(header: string, message: string, position: any, color: string, duration: number, icon?: string) {
 
     if (!icon) {

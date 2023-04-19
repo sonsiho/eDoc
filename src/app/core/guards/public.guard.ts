@@ -12,14 +12,13 @@ export class PublicGuard implements CanActivate {
   ) { }
 
   async canActivate(): Promise<boolean> {
-    
-    const is_signed_in = !!(await this.authService.getSession());
+    const isAuthenticated = await this.authService.isAuthenticated();
 
     // If signed in, redirect to home page
-    if (is_signed_in) {
+    if (isAuthenticated) {
       this.router.navigate(['/home']);
     }
 
-    return !is_signed_in;
+    return !isAuthenticated;
   }
 }

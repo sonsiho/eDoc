@@ -20,23 +20,22 @@ export class AuthService {
 
   ) { }
 
-  // Get user session
-  async getSession() {
+  async isAuthenticated() {
     const accessToken = await this.dataService.get('access_token');
-    console.log(accessToken);
     return accessToken;
   }
-
+  
   async setSession(token) {
     await this.dataService.set('access_token', token);
   }
 
   // Sign in
   signIn(username: string, password: string): Observable<any> {
-    const url = urlJoin(environment.apiUrl, "v1/auth/token");
+    const url = urlJoin(environment.apiUrl, "v1/auth/login");
     return this.httpClient.post(url, {
-      ClientId: 'smas3',
-      ClientSecret: '0aCpNK1F6Kssk4yhtJfbLA==',
+      username: username,
+      password: password,
+      LoginType: 2
     });
   }
 

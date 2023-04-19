@@ -21,12 +21,8 @@ const routes: Routes = [
         loadChildren: () => import('../pages/secure/charts/charts.module').then(m => m.ChartsPageModule)
       },
       {
-        path: 'payments',
-        loadChildren: () => import('../pages/secure/payments/payments.module').then(m => m.PaymentsPageModule)
-      },
-      {
-        path: 'styleguide',
-        loadChildren: () => import('../pages/secure/styleguide/styleguide.module').then(m => m.StyleguidePageModule)
+        path: 'settings',
+        loadChildren: () => import('../pages/secure/settings/settings.module').then(m => m.SettingsPageModule)
       },
     ]
   }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { PublicGuard } from './core/guards/public.guard';
 // import { AuthGuard } from './guards/auth.guard';
 // import { PublicGuard } from './guards/public.guard';
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   {
     path: 'signin',
     loadChildren: () => import('./pages/public/signin/signin.module').then(m => m.SigninPageModule),
-    // canActivate: [PublicGuard] // Prevent for signed in users
+    canActivate: [PublicGuard] // Prevent for signed in users
   },
   // {
   //   path: 'signup',

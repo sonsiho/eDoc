@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'https://edocapi.smas.edu.vn/api'
+  apiUrl:'https://edoc.smas.edu.vn/api'
 };
 
 /*

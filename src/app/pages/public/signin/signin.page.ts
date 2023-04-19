@@ -6,6 +6,7 @@ import { ToastService } from 'src/app/core/services/toast/toast.service';
 import { Router } from '@angular/router';
 import { BaseReponseModel } from 'src/app/core/models/base-response.model';
 import { Storage } from '@ionic/storage-angular';
+import { SpinnerService } from 'src/app/core/services/spinnner/spinner.service';
 
 @Component({
   selector: 'app-signin',
@@ -13,15 +14,10 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-
-  current_year: number = new Date().getFullYear();
-
-  signin_form: FormGroup;
-  submit_attempt: boolean = false;
-
+  signinForm: FormGroup;
   constructor(
     private authService: AuthService,
-    private loadingController: LoadingController,
+    private spinnerService: SpinnerService,
     private formBuilder: FormBuilder,
     private toastService: ToastService,
     private router: Router
@@ -30,55 +26,42 @@ export class SigninPage implements OnInit {
   ngOnInit() {
 
     // Setup form
-    this.signin_form = this.formBuilder.group({
+    this.signinForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      password: ['', Validators.compose([Validators.required])]
     });
 
-    // DEBUG: Prefill inputs
-    this.signin_form.get('username').setValue('');
-    this.signin_form.get('password').setValue('');
   }
 
+  message: string = '';
   // Sign in
   async signIn() {
 
-    this.submit_attempt = true;
+    this.message = '';
 
     // If email or password empty
-    if (this.signin_form.value.username == '' || this.signin_form.value.password == '') {
-      this.toastService.presentToast('Error', 'Please input email and password', 'top', 'danger', 2000);
+    if (this.signinForm.value.username == '' || this.signinForm.value.password == '') {
+      this.toastService.error('Chưa nhập tài khoản or mật khẩu');
       return;
     }
 
-    // Proceed with loading overlay
-    const loading = await this.loadingController.create({
-      cssClass: 'default-loading',
-      message: 'Đang xử lý...',
-      spinner: 'crescent'
-    });
-    await loading.present();
-
-    // TODO: Add your sign in logic
-    // ...
-
-    this.authService.signIn(this.signin_form.value.username, this.signin_form.value.password)
+    this.spinnerService.show();
+    this.authService.signIn(this.signinForm.value.username, this.signinForm.value.password)
       .subscribe(
         {
-          complete: () => {
-            loading.dismiss();
+          complete: async () => {
+            await this.spinnerService.hide();
           },
-          error: (err) => {
-            this.toastService.presentToast('Error', JSON.stringify(err), 'top', 'danger', 2000);
-            loading.dismiss();
+          error: async (err) => {
+            this.toastService.error(JSON.stringify(err));
+            await this.spinnerService.hide();
           },
           next: async (res: BaseReponseModel<any>) => {
             if (res.success) {
               await this.authService.setSession(res.data.token);
               await this.router.navigate(['/home']);
             } else {
-              this.toastService.presentToast('Error', res.message, 'top', 'danger', 2000);
-              return;
+              this.message = res.message;
             }
           },
         });
