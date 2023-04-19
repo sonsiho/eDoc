@@ -1,8 +1,7 @@
 {
-  "name": "ionic-start-theme",
-  "version": "2.0.0",
-  "author": "João Firmino",
-  "homepage": "https://github.com/firminoweb/ionic-start-theme",
+  "name": "eDoc",
+  "version": "1.0.0",
+  "author": "sonhsa",
   "scripts": {
     "ng": "ng",
     "start": "ionic serve",
@@ -38,6 +37,7 @@
     "bootstrap": "^5.2.3",
     "chart.js": "^4.2.0",
     "date-fns": "^2.29.3",
+    "jwt-decode": "^3.1.2",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "ng2-charts": "^4.1.1",
     "rxjs": "~7.8.0",

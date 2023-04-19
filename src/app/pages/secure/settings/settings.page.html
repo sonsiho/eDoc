@@ -1,24 +1,37 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="fade" [translucent]="true">
-    <ion-toolbar color="light">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
       <ion-title>Khác</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-card class="ion-no-margin profile-card">
-    <ion-card-content>
-      <ion-avatar>
+  <ng-container *ngIf="this._currentUser$ | async as user">
+    <div class="d-flex flex-row profile-card p-2 mb-5">
+      <ion-avatar class="me-4 align-self-center">
         <img src="https://edoc.smas.edu.vn/assets/media/users/default.svg">
       </ion-avatar>
+      <div class="d-flex flex-column">
+        <h2>
+          <ion-text color="dark"><strong>{{user.FullName}}</strong></ion-text>
+        </h2>
 
-      <h1>
-        <ion-text color="tertiary"><strong>John Doe</strong></ion-text>
-      </h1>
+        <p>
+          <ion-text color="medium">{{user.UnitName}}</ion-text>
+        </p>
+      </div>
+    </div>
 
-      <p>
-        <ion-text color="medium">john.doe@mail.com</ion-text>
-      </p>
-    </ion-card-content>
-  </ion-card>
+    <div class="d-flex flex-column">
+      <div class="menu-item p-1">
+        <div class="menu-link d-flex align-items-center">
+          <div class="menu-icon d-flex flex-shrink-0 align-items-center justify-content-center me-1"></div>
+          <div class="menu-title d-flex align-items-center flex-grow-1">
+            User Profile
+          </div>
+          <div class="menu-arrow d-flex align-items-stretch"></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 
 </ion-content>

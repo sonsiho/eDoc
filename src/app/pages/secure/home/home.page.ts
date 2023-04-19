@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,16 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  content_loaded: boolean = false;
-
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
 
-    // Fake timeout
-    setTimeout(() => {
-      this.content_loaded = true;
-    }, 2000);
   }
 
 }

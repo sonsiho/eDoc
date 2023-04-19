@@ -58,7 +58,7 @@ export class SigninPage implements OnInit {
           },
           next: async (res: BaseReponseModel<any>) => {
             if (res.success) {
-              await this.authService.setSession(res.data.token);
+              await this.authService.setToken(res.data.token);
               await this.router.navigate(['/home']);
             } else {
               this.message = res.message;

@@ -24,7 +24,9 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'ios'
+    }),
     ReactiveFormsModule,
     AppRoutingModule,
     NgChartsModule,
@@ -32,6 +34,7 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
     IonicStorageModule.forRoot({
       name: '__eDocDatabase',
       driverOrder: [CordovaSQLiteDriver._driver, Drivers.LocalStorage, Drivers.IndexedDB],
+      version: 2
     }),
     BrowserAnimationsModule
   ],
