@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
-  <ion-header [translucent]="true">
-    <ion-toolbar>
+  <ion-header>
+    <ion-toolbar color="light">
       <ion-title>Khác</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -22,29 +22,29 @@
     </div>
   </ng-container>
 
-  <ion-list>
-    <ion-item>
+  <ion-list color="light">
+    <ion-item routerLink="/other/face-id">
       <ion-icon slot="start" name="finger-print"></ion-icon>
       <ion-label>Cài đặt FaceID</ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-list>
-    <ion-item>
+  <ion-list style="margin-top: 20px;">
+    <ion-item (click)="signOut()">
       <ion-icon slot="start" name="exit"></ion-icon>
       <ion-label>Đăng xuất</ion-label>
     </ion-item>
   </ion-list>
 
   <!-- <mat-selection-list class="menus" role="list">
-    <mat-list-item role="listitem">
+    <mat-list-item role="listitem" routerLink="/other/face-id">
       <ion-icon matListItemIcon name="finger-print"></ion-icon>
       <div matListItemTitle>Cài đặt FaceID</div>
     </mat-list-item>
   </mat-selection-list>
 
   <mat-selection-list class="menus mt-5" role="list">
-    <mat-list-item role="listitem">
+    <mat-list-item role="listitem" (click)="signOut()">
       <ion-icon matListItemIcon name="exit"></ion-icon>
       <div matListItemTitle>Đăng xuất</div>
     </mat-list-item>

@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SettingsPageRoutingModule } from './settings-routing.module';
+import { OtherPageRoutingModule } from './other-routing.module';
 
-import { SettingsPage } from './settings.page';
-import {MatListModule} from '@angular/material/list';
+import { OtherPage } from './other.page';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SettingsPageRoutingModule,
+    OtherPageRoutingModule,
     MatListModule
   ],
-  declarations: [SettingsPage]
+  declarations: [OtherPage]
 })
-export class SettingsPageModule {}
+export class OtherPageModule {}
