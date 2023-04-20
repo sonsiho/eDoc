@@ -1,4 +1,4 @@
-package com.ionic.starttheme;
+package com.viettel.edoc;
 
 import com.getcapacitor.BridgeActivity;
 
