@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "author": "sonhsa",
   "scripts": {
-    "ng": "ng",
     "start": "ionic serve",
-    "build": "ng build",
-    "prod": "ionic build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "run-ios":"ionic build && npx cap copy ios && ionic capacitor run ios -l --external",
+    "run-android":"ionic build && npx cap copy android && npx ionic cap run android  -l --external",
+    "prod": "ionic build --prod"
   },
   "private": true,
   "dependencies": {
