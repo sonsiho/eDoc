@@ -1,10 +1,10 @@
 {
-	"appId": "com.ionic.starttheme",
+	"appId": "com.viettel.edoc",
 	"appName": "eDoc",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"ios": {
-		"scheme": "eDoc"
+		"scheme": "App"
 	},
 	"plugins": {
 		"CapacitorSQLite": {
