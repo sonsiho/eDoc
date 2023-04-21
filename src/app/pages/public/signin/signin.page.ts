@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { BaseReponseModel } from 'src/app/core/models/base-response.model';
 import { Storage } from '@ionic/storage-angular';
 import { SpinnerService } from 'src/app/core/services/spinnner/spinner.service';
+import { BiometricService } from 'src/app/core/services/biometric/biometric.service';
 
 @Component({
   selector: 'app-signin',
@@ -20,10 +21,11 @@ export class SigninPage implements OnInit {
     private spinnerService: SpinnerService,
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private biometricService : BiometricService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     // Setup form
     this.signinForm = this.formBuilder.group({
@@ -57,6 +59,7 @@ export class SigninPage implements OnInit {
             await this.spinnerService.hide();
           },
           next: async (res: BaseReponseModel<any>) => {
+            console.log(res);
             if (res.success) {
               await this.authService.setToken(res.data.token);
               await this.router.navigate(['/home']);

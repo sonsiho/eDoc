@@ -15,6 +15,10 @@ export class ToastService {
     await this.presentToast('Error', message, 'top', 'danger', 2000);
   }
 
+  async info(message) {
+    await this.presentToast('Info', message, 'top', 'info', 2000);
+  }
+
   async presentToast(header: string, message: string, position: any, color: string, duration: number, icon?: string) {
 
     if (!icon) {
