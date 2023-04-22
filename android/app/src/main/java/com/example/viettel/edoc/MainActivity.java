@@ -1,4 +1,4 @@
-package com.viettel.edoc;
+package com.example.viettel.edoc;
 
 import com.getcapacitor.BridgeActivity;
 import com.epicshaggy.biometric.NativeBiometric;
