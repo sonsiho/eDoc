@@ -29,8 +29,8 @@ export class SigninPage implements OnInit {
 
     // Setup form
     this.signinForm = this.formBuilder.group({
-      username: ['', Validators.compose([Validators.required])],
-      password: ['', Validators.compose([Validators.required])]
+      username: ['hcm_thcs_viettel11b', Validators.compose([Validators.required])],
+      password: ['12345678aA@', Validators.compose([Validators.required])]
     });
 
   }

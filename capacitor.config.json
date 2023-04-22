@@ -11,7 +11,7 @@
 			"iosDatabaseLocation": "Library/CapacitorDatabase"
 		},
 		"Keyboard": {
-			"resize": "body",
+			"resize": "native",
 			"style": "DARK",
 			"resizeOnFullScreen": true
 		}
