@@ -1,8 +1,7 @@
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
 
-  <div class="ion-padding h-100 ion-flex ion-flex-center">
-
-    <div class="logo-container" style="margin-top: 30%;">
+  <ion-card class="card-form-login">
+    <div class="logo-container">
       <h1 class="animate__animated animate__fadeInUp">
         <ion-text color="dark">eDoc</ion-text>
       </h1>
@@ -28,17 +27,18 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-error class="mb-3 text-center">{{message}}</mat-error>
+      <mat-error *ngIf="message" class="mb-3 text-center">{{message}}</mat-error>
 
-      <button class="w-100" mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">
-        Đăng nhập
-      </button>
+      <div class="d-flex align-items-center">
+        <ion-button class="flex-grow-1 me-2" type="submit" [disabled]="signinForm.invalid">Đăng nhập</ion-button>
+        <!-- <button class="flex-grow-1 me-2" mat-raised-button color="primary" type="submit"
+          [disabled]="signinForm.invalid">
+          Đăng nhập
+        </button> -->
+        <ion-icon size="large" color="primary" name="finger-print-outline" (click)="biometricCheck()"></ion-icon>
+      </div>
 
-      <!-- <ion-button color="light" fill="clear" expand="block" class="ion-button-small ion-margin-top-medium" routerLink="/password-reset">
-        Forgot password?
-      </ion-button> -->
     </form>
-
-  </div>
+  </ion-card>
 
 </ion-content>

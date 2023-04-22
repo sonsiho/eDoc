@@ -14,10 +14,13 @@ export class DataService {
   }
 
   async init() {
-    // If using, define drivers here: await this.storage.defineDriver(/*...*/);
-    await this.storage.defineDriver(CordovaSQLiteDriver);
-    const storage = await this.storage.create();
-    this._storage = storage;
+    if (!this._storage) {
+      // If using, define drivers here: await this.storage.defineDriver(/*...*/);
+      await this.storage.defineDriver(CordovaSQLiteDriver);
+      const storage = await this.storage.create();
+      this._storage = storage;
+    }
+
   }
 
   public async set(key: string, value: any) {
@@ -32,4 +35,7 @@ export class DataService {
     await this._storage?.clear();
   }
 
+  public async remove(key){
+    await this._storage?.remove(key);
+  }
 }

@@ -2,9 +2,18 @@
   <ion-header>
     <ion-toolbar color="light">
       <ion-buttons slot="start">
-        <ion-back-button default-href="#"></ion-back-button>
+        <ion-back-button color="primary" default-href="#"></ion-back-button>
       </ion-buttons>
       <ion-title>Cài đặt FaceID</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-item>
+    <ion-icon size="large" color="primary" name="finger-print-outline" slot="start"></ion-icon>
+    <ion-label>
+      <h2>Đăng nhập bằng FaceID</h2>
+      <p class="ion-text-wrap">Sử dụng FaceID của bạn để đăng nhập cho mật khẩu</p>
+    </ion-label>
+    <ion-toggle [checked]="isOnBiometric" [(ngModel)]="isOnBiometric" (ngModelChange)="onChange($event)" slot="end"></ion-toggle>
+  </ion-item>
 </ion-content>

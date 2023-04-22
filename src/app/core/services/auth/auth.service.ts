@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import { StoreageKeyConstants } from '../../constants/storage-key.constants';
 import { DecodeTokenDto } from '../../models/auth/decode-token.model';
 import { UserDataDto } from '../../models/auth/user-data.model';
+import { BiometricService } from '../biometric/biometric.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private httpClient: HttpClient,
-    private dataService: DataService
+    private dataService: DataService,
+    private biometricService : BiometricService
 
   ) { }
 
@@ -76,8 +78,18 @@ export class AuthService {
     // clean subscriptions / local storage etc. here
     // ...
 
-    await this.dataService.clear();
+    await this.dataService.remove(StoreageKeyConstants.AccessToken);
     // Navigate to sign-in
     this.router.navigateByUrl('/signin');
+  }
+
+  async fetchUser(){
+    const token = await this.getToken();
+    const url = urlJoin(environment.apiUrl, "v1/auth/user");
+    return this.httpClient.get(url,{
+      headers: new HttpHeaders({
+        "Authorization" : `Bearer ${token}`
+      })
+    });
   }
 }

@@ -8,9 +8,10 @@
     background-size: cover;
   }
 
-  ion-item {
-    --border-radius: 8px;
-    margin-bottom: 8px;
+  .card-form-login{
+    background-color: transparent;
+    background: transparent;
+    box-shadow: none;
   }
 
   .logo-container {
@@ -19,10 +20,6 @@
     h1 {
       font-size: 32px;
       font-weight: 800;
-    }
-
-    p {
-      margin-bottom: 42px;
     }
   }
 }

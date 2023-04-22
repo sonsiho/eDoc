@@ -1,40 +1,64 @@
 import { Injectable } from '@angular/core';
 import { BiometryType, NativeBiometric } from "capacitor-native-biometric";
 import { ToastService } from '../toast/toast.service';
+import { DataService } from '../data/data.service';
+import { StoreageKeyConstants } from '../../constants/storage-key.constants';
 
+export const Server = 'edoc.smas.edu.vn';
 @Injectable({
   providedIn: 'root'
 })
 export class BiometricService {
 
-  constructor(private toastService: ToastService) { }
+  
+  constructor(private toastService: ToastService,
+    private dataService: DataService) { }
 
-  async performBiometricVerificatin(){
+  async isUseBiometric() {
+    return await this.dataService.get(StoreageKeyConstants.Biometric);
+  }
+  async getBiomtryType() {
     const result = await NativeBiometric.isAvailable();
-  
-    if(!result.isAvailable) return;
-  
-    const isFaceID = result.biometryType == BiometryType.FACE_ID;
-  
+
+    if (!result.isAvailable)
+      return BiometryType.NONE;
+
+    return result.biometryType;
+  }
+
+  async verify() {
+    const result = await NativeBiometric.isAvailable();
+
+    if (!result.isAvailable) return false;
+
     const verified = await NativeBiometric.verifyIdentity({
       reason: "For easy log in",
       title: "Log in",
-    })
-      .then(() => true)
+      maxAttempts: 1,
+    }).then(() => true)
       .catch(() => false);
-  
-    if(!verified) return;
-  
-    // NativeBiometric.setCredentials({
-    //   username: "hcm_thcs_viettel11b",
-    //   password: "12345678aA@",
-    //   server: "edoc.smas.edu.vn",
-    // }).then();
 
-    const credentials = await NativeBiometric.getCredentials({
-      server: "edoc.smas.edu.vn",
-    });
-
-    console.log(credentials);
+    return verified;
   }
+
+  async getUser() {
+    return await NativeBiometric.getCredentials({
+      server: Server
+    });
+  }
+
+  async setUser(username,password) {
+    return await NativeBiometric.setCredentials({
+      server: Server,
+      username: username,
+      password: password
+    });
+  }
+
+  async clear(){
+    await NativeBiometric.deleteCredentials({
+      server:Server
+    });
+  }
+
 }

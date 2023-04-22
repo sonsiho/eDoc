@@ -11,20 +11,18 @@ import { BiometricService } from 'src/app/core/services/biometric/biometric.serv
 })
 export class HomePage implements OnInit {
   currentUser$: Observable<UserDataDto>;
-  constructor(private authService: AuthService,
-    private biometricService  : BiometricService) { }
+  constructor(private authService: AuthService) { }
 
   async ngOnInit() {
     this.currentUser$ = this.authService.currentUser$;
-
-    // 
   }
 
-  handleRefresh(event) {
-    setTimeout(async () => {
-      await this.biometricService.performBiometricVerificatin();
-      // Any calls to load data go here
-      event.target.complete();
-    }, 2000);
+  async handleRefresh(event) {
+    event.target.complete();
+    (await this.authService.fetchUser()).subscribe(res =>{
+      console.log(res);
+      
+    })
+    
   };
 }

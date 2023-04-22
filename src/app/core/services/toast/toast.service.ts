@@ -41,7 +41,9 @@ export class ToastService {
       duration: duration,
       position: position,
       color: color,
-      icon: icon
+      icon: icon,
+      translucent : true,
+      animated:true
     });
 
     await toast.present();
