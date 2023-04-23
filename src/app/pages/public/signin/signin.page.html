@@ -1,44 +1,68 @@
 <ion-content class="ion-padding">
 
-  <ion-card class="card-form-login">
-    <div class="logo-container">
-      <h1 class="animate__animated animate__fadeInUp">
-        <ion-text color="dark">eDoc</ion-text>
-      </h1>
-    </div>
-
-    <!-- Login form -->
-    <form [formGroup]="signinForm" (submit)="signIn()">
-      <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
-        <mat-label>Tài khoản</mat-label>
-        <input matInput placeholder="Tài khoản" formControlName="username">
-        <mat-error *ngIf="signinForm.controls.username?.invalid
-        && (signinForm.controls.username?.touched || signinForm.controls.username?.dirty)">
-          {{signinForm.controls.username?.hasError('required') ? 'Chưa nhập tài khoản' : ''}}
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
-        <mat-label>Mật khẩu</mat-label>
-        <input matInput placeholder="Mật khẩu" formControlName="password" type="password">
-        <mat-error *ngIf="signinForm.controls.password?.invalid
-        && (signinForm.controls.username?.touched || signinForm.controls.username?.dirty)">
-          {{signinForm.controls.password?.hasError('required') ? 'Chưa nhập tài khoản' : ''}}
-        </mat-error>
-      </mat-form-field>
-
-      <mat-error *ngIf="message" class="mb-3 text-center">{{message}}</mat-error>
-
-      <div class="d-flex align-items-center">
-        <ion-button class="flex-grow-1 me-2" type="submit" [disabled]="signinForm.invalid">Đăng nhập</ion-button>
-        <!-- <button class="flex-grow-1 me-2" mat-raised-button color="primary" type="submit"
-          [disabled]="signinForm.invalid">
-          Đăng nhập
-        </button> -->
-        <ion-icon size="large" color="primary" name="finger-print-outline" (click)="biometricCheck()"></ion-icon>
+  <ion-card class="card-form-login h-100">
+    <div class="h-100 py-3 pb-5 d-flex flex-column align-items-center" [class.justify-content-between]="isLoading">
+      <div class="logo-container my-5">
+        <img #logonIcon src="./assets/logo/icon-removebg.png" width="70" height="70">
       </div>
 
-    </form>
+      <form [formGroup]="signinForm" (submit)="signIn()" *ngIf="!isLoading">
+        <div></div>
+        <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+          <mat-label>Tài khoản</mat-label>
+          <input matInput placeholder="Tài khoản" formControlName="username">
+          <mat-error *ngIf="signinForm.controls.username?.invalid
+          && (signinForm.controls.username?.touched || signinForm.controls.username?.dirty)">
+            {{signinForm.controls.username?.hasError('required') ? 'Chưa nhập tài khoản' : ''}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 mb-3" color="primary">
+          <mat-label>Mật khẩu</mat-label>
+          <input matInput placeholder="Mật khẩu" formControlName="password" type="password">
+          <mat-error *ngIf="signinForm.controls.password?.invalid
+          && (signinForm.controls.username?.touched || signinForm.controls.username?.dirty)">
+            {{signinForm.controls.password?.hasError('required') ? 'Chưa nhập tài khoản' : ''}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-error *ngIf="message" class="mb-3 text-center">{{message}}</mat-error>
+
+        <div class="d-flex align-items-center">
+          <ion-button class="flex-grow-1 me-2" type="submit" [disabled]="signinForm.invalid">Đăng nhập</ion-button>
+          <ion-icon size="large" color="primary" name="finger-print-outline" (click)="biometricCheck()"></ion-icon>
+        </div>
+
+      </form>
+
+      <ng-container *ngIf="isLoading">
+        <div class="d-flex flex-column p-2 align-items-center mb-5">
+          <span class="timer my-5 text-dark" style="font-size:60px">
+            {{currentTime}}
+          </span>
+          <span class="text-dark" style="font-size:20px">
+            {{currentDate}}
+          </span>
+        </div>
+
+
+        <div class="d-flex flex-column p-2 align-items-center mb-5">
+          <span class="text-dark" style="font-size:30px">
+            Xin chào !
+          </span>
+          <span class="text-dark" style="font-size:20px">
+            eDoc đang cập nhật dữ liệu mới
+          </span>
+          <span class="text-dark" style="font-size:20px">
+            Xin vui lòng chờ...
+          </span>
+        </div>
+      </ng-container>
+
+
+
+    </div>
+
   </ion-card>
 
 </ion-content>

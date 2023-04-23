@@ -1,8 +1,4 @@
 :host {
-  // body {
-  //   background-color: var(--ion-color-dark);
-  // }
-  
   ion-content {
     --background: url(/assets/background/background-1.png) no-repeat center/cover fixed;
     background-size: cover;
@@ -14,12 +10,4 @@
     box-shadow: none;
   }
 
-  .logo-container {
-    text-align: center;
-
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-    }
-  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BiometryType, NativeBiometric } from "capacitor-native-biometric";
+import { AvailableResult, BiometryType, NativeBiometric } from "capacitor-native-biometric";
 import { ToastService } from '../toast/toast.service';
 import { DataService } from '../data/data.service';
 import { StoreageKeyConstants } from '../../constants/storage-key.constants';
@@ -10,11 +10,33 @@ export const Server = 'edoc.smas.edu.vn';
 })
 export class BiometricService {
 
-  
-  constructor(private toastService: ToastService,
-    private dataService: DataService) { }
+  biometricData: AvailableResult;
+  constructor(private dataService: DataService) {
+    this.init();
+  }
+
+  async init() {
+    try {
+      this.biometricData = await NativeBiometric?.isAvailable();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async isAvailable() {
+    try {
+      this.biometricData = await NativeBiometric?.isAvailable();
+
+      return this.biometricData.isAvailable
+    }
+    catch (error) {
+      return false;
+    }
+  }
 
   async isUseBiometric() {
+    if (!this.biometricData?.isAvailable) {
+      return false;
+    }
     return await this.dataService.get(StoreageKeyConstants.Biometric);
   }
   async getBiomtryType() {
@@ -27,6 +49,10 @@ export class BiometricService {
   }
 
   async verify() {
+    if (!this.biometricData?.isAvailable) {
+      return false;
+    }
+
     const result = await NativeBiometric.isAvailable();
 
     if (!result.isAvailable) return false;
@@ -42,12 +68,20 @@ export class BiometricService {
   }
 
   async getUser() {
+    if (!this.biometricData?.isAvailable) {
+      return null;
+    }
+
     return await NativeBiometric.getCredentials({
       server: Server
     });
   }
 
-  async setUser(username,password) {
+  async setUser(username, password) {
+    if (!this.biometricData?.isAvailable) {
+      return false;
+    }
+
     return await NativeBiometric.setCredentials({
       server: Server,
       username: username,
@@ -55,9 +89,13 @@ export class BiometricService {
     });
   }
 
-  async clear(){
+  async clear() {
+    if (!this.biometricData?.isAvailable) {
+      return false;
+    }
+
     await NativeBiometric.deleteCredentials({
-      server:Server
+      server: Server
     });
   }
 
