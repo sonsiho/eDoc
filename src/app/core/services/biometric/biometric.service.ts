@@ -26,6 +26,7 @@ export class BiometricService {
     try {
       this.biometricData = await NativeBiometric?.isAvailable();
 
+      console.log(this.biometricData);
       return this.biometricData.isAvailable
     }
     catch (error) {
