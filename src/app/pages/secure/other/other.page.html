@@ -1,27 +1,9 @@
-<ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar color="light">
-      <ion-title>Khác</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ng-container *ngIf="this._currentUser$ | async as user">
-    <div class="d-flex flex-row profile-card p-2 mb-5">
-      <ion-avatar class="me-4 align-self-center">
-        <img src="https://edoc.smas.edu.vn/assets/media/users/default.svg">
-      </ion-avatar>
-      <div class="d-flex flex-column">
-        <h2>
-          <ion-text color="dark"><strong>{{user.FullName}}</strong></ion-text>
-        </h2>
-
-        <p>
-          <ion-text color="medium">{{user.UnitName}}</ion-text>
-        </p>
-      </div>
-    </div>
-  </ng-container>
-
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Khác</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
   <ion-list color="light">
     <ion-item routerLink="/other/face-id">
       <ion-icon slot="start" name="finger-print" color="primary"></ion-icon>
