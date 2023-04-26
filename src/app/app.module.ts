@@ -25,7 +25,7 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode: 'ios'
+      mode: 'ios',
     }),
     ReactiveFormsModule,
     AppRoutingModule,

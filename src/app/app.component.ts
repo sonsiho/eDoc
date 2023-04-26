@@ -3,6 +3,7 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
+import { FcmService } from './core/services/fcm/fcm.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
 
   constructor(
-    private platform: Platform
+    private platform: Platform,
+    private fcmService: FcmService
   ) {
     this.initializeApp();
   }
@@ -25,7 +27,7 @@ export class AppComponent {
 
       // If we're on a mobile platform (iOS / Android), not web
       if (Capacitor.getPlatform() !== 'web') {
-
+        await this.fcmService.registerPush();
         // Set StatusBar style (dark / light)
         // await StatusBar.setStyle({ style: Style.Dark });
       }

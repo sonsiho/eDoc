@@ -1,5 +1,5 @@
 {
-	"appId": "com.viettel.edoc",
+	"appId": "com.example.viettel.edoc",
 	"appName": "eDoc",
 	"webDir": "www",
 	"bundledWebRuntime": false,
@@ -14,6 +14,10 @@
 			"resize": "native",
 			"style": "DARK",
 			"resizeOnFullScreen": true
-		}
+		},
+		"PushNotifications": {
+			"presentationOptions": ["badge", "sound", "alert"]
+		  }
+	  
 	}
 }
