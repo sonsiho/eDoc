@@ -2,7 +2,6 @@
 	"appId": "com.example.viettel.edoc",
 	"appName": "eDoc",
 	"webDir": "www",
-	"bundledWebRuntime": false,
 	"ios": {
 		"scheme": "App"
 	},

@@ -27,7 +27,7 @@ export class AppComponent {
 
       // If we're on a mobile platform (iOS / Android), not web
       if (Capacitor.getPlatform() !== 'web') {
-        await this.fcmService.registerPush();
+        // await this.fcmService.registerPush();
         // Set StatusBar style (dark / light)
         // await StatusBar.setStyle({ style: Style.Dark });
       }
