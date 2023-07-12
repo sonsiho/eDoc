@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "edoc-be1a0": {
+      "hosting": {
+        "app": [
+          "edoc-be1a0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "edoc-be1a0"
+  }
+}
